@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | RV There Yet Mobile Camper Repair (845) 239-9746</title>
+  <meta name="description" content="Expert RV repair and maintenance services including appliances, roof, plumbing, water heater, furnace, and orientation. Serving Sullivan, Orange, and Ulster Counties." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:        #1B4D35;
+      --green-light:  #2a6e4b;
+      --orange:       #E8622A;
+      --orange-light: #f57c3f;
+      --cream:        #F7F3EC;
+      --white:        #ffffff;
+      --dark:         #111820;
+      --gray:         #5a6472;
+      --border:       #ddd6cb;
+      --radius:       12px;
+      --shadow:       0 4px 24px rgba(0,0,0,0.10);
+      --transition:   0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(17, 24, 32, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--orange);
+      color: var(--white) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      transition: background var(--transition) !important;
+    }
+
+    .nav-cta:hover { background: var(--orange-light) !important; color: var(--white) !important; }
+
+    /* hamburger */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--dark);
+      padding: 1.5rem 5vw 2rem;
+      z-index: 999;
+      gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.85);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a.active { color: var(--orange); }
+
+    /* ── PAGE HEADER ─────────────────────────────────── */
+    .page-header {
+      padding-top: 68px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header-inner {
+      position: relative;
+      z-index: 2;
+      padding: 5rem 5vw 4rem;
+      max-width: 900px;
+    }
+
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.squarespace-cdn.com/content/v1/67e9b6278ad1d04967a0234f/1c0666eb-b48e-41d6-acd4-1a58be965090/image3.jpeg');
+      background-size: cover;
+      background-position: center 40%;
+      opacity: 0.18;
+      z-index: 0;
+    }
+
+    .page-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232, 98, 42, 0.18);
+      border: 1px solid rgba(232, 98, 42, 0.5);
+      color: var(--orange-light);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .page-header-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 600px;
+    }
+
+    /* ── SECTION WRAPPER ─────────────────────────────── */
+    section { padding: 5rem 5vw; }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SERVICE DETAIL CARDS ────────────────────────── */
+    #service-detail { background: var(--cream); }
+
+    .service-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .svc-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid transparent;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .svc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+      border-top-color: var(--orange);
+    }
+
+    .svc-card-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .svc-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.7rem;
+    }
+
+    .svc-card p {
+      font-size: 0.93rem;
+      color: var(--gray);
+      line-height: 1.68;
+      margin-bottom: 1rem;
+    }
+
+    .svc-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .svc-list li {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+    }
+
+    .svc-sub-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.8rem;
+    }
+
+    .svc-sub-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.91rem;
+      color: var(--gray);
+      padding: 0.25rem 0;
+      line-height: 1.5;
+    }
+
+    .svc-sub-list li::before {
+      content: '✓';
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ── PHOTO STRIP ─────────────────────────────────── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-height: 460px;
+      overflow: hidden;
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-strip-text {
+      background: var(--green);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 4rem;
+    }
+
+    .photo-strip-text h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .photo-strip-text h2 span { color: #ffd166; }
+
+    .photo-strip-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .photo-strip-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      transition: background var(--transition), transform var(--transition);
+      align-self: flex-start;
+    }
+
+    .photo-strip-cta:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+    }
+
+    /* ── HOURS STRIP ─────────────────────────────────── */
+    .hours-strip {
+      background: var(--dark);
+      padding: 2.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .hours-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hours-icon { font-size: 2rem; }
+
+    .hours-text h4 {
+      color: var(--white);
+      font-size: 0.95rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .hours-text p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    #contact { background: var(--cream); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .contact-item-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .contact-item-text h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-item-text p {
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin: 0;
+    }
+
+    /* form */
+    .contact-form-wrapper {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.09);
+    }
+
+    .contact-form-wrapper h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--dark);
+    }
+
+    .form-hint {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: var(--cream);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232,98,42,0.12);
+      background: var(--white);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      transition: background var(--transition), transform var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+    }
+
+    .form-submit { width: 100%; padding: 0.9rem; font-size: 1rem; border-radius: 50px; border: none; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.75);
+      padding: 4rem 5vw 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand h3 span { color: var(--orange); }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      max-width: 340px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.88rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: rgba(255,255,255,0.65);
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-astryx {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    .footer-astryx img {
+      height: 22px;
+      width: 22px;
+      object-fit: contain;
+      opacity: 0.7;
+      border-radius: 4px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .photo-strip { grid-template-columns: 1fr; max-height: none; }
+      .photo-strip img { height: 300px; }
+      .photo-strip-text { padding: 2.5rem 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrapper { padding: 1.5rem; }
+      .hours-strip { gap: 1.5rem; flex-direction: column; text-align: center; }
+      .service-detail-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="home.html" class="nav-logo">RV <span>There Yet</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="tel:8452399746" class="nav-cta">📞 (845) 239-9746</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Open navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="home.html" onclick="closeMenu()">Home</a>
+    <a href="services.html" class="active" onclick="closeMenu()">Services</a>
+    <a href="about.html" onclick="closeMenu()">About</a>
+    <a href="contact.html" onclick="closeMenu()">Contact</a>
+    <a href="tel:8452399746">📞 (845) 239-9746</a>
+  </div>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header">
+    <div class="page-header-bg" role="img" aria-label="White truck towing an RV trailer"></div>
+    <div class="page-header-inner">
+      <div class="page-header-badge">Expert Mobile RV Service</div>
+      <h1>Our <em>Services</em></h1>
+      <p class="page-header-sub">
+        From full RV repairs and roof maintenance to annual water heater and furnace service —
+        we handle it all at your location throughout Sullivan, Orange &amp; Ulster Counties.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── SERVICE DETAIL ── -->
+  <section id="service-detail">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Comprehensive RV Care</h2>
+    <p class="section-sub">We come to you with the tools and expertise to diagnose and fix whatever your RV needs — no tow required.</p>
+
+    <div class="service-detail-grid">
+
+      <!-- RV Repair -->
+      <div class="svc-card">
+        <div class="svc-card-icon" aria-hidden="true">🔧</div>
+        <h3>RV Repair</h3>
+        <p>We can diagnose and fix any issue you may have with your RV. Common areas we service:</p>
+        <ul class="svc-list">
+          <li>Appliances</li>
+          <li>Leveling Jacks</li>
+          <li>Awnings</li>
+          <li>Electrical</li>
+          <li>Plumbing</li>
+          <li>AC Units</li>
+          <li>Roof</li>
+        </ul>
+      </div>
+
+      <!-- Roof Maintenance -->
+      <div class="svc-card">
+        <div class="svc-card-icon" aria-hidden="true">🏠</div>
+        <h3>Roof Maintenance</h3>
+        <p>Protect your investment from the top down. Our roof maintenance service keeps leaks away before they start.</p>
+        <ul class="svc-sub-list">
+          <li>Check for cracks or tears in membrane</li>
+          <li>Re-chalk problem areas on cap</li>
+          <li>Seal around vents, skylights &amp; fans</li>
+        </ul>
+      </div>
+
+      <!-- RV Orientation -->
+      <div class="svc-card">
+        <div class="svc-card-icon" aria-hidden="true">🗺️</div>
+        <h3>RV Orientation</h3>
+        <p>
+          Many people buy an RV and don't fully understand how to use all its systems or what maintenance
+          schedules to follow. We walk you through your unit, explain how everything works, and set you up
+          for success as an RV owner.
+        </p>
+      </div>
+
+      <!-- Water Heater Service -->
+      <div class="svc-card">
+        <div class="svc-card-icon" aria-hidden="true">💧</div>
+        <h3>Water Heater Service</h3>
+        <p>Recommended annually for safe, reliable operation. Our thorough inspection covers:</p>
+        <ul class="svc-sub-list">
+          <li>Disinfect the system</li>
+          <li>Check anode rod condition</li>
+          <li>Test &amp; inspect relief valve</li>
+          <li>Check complete operation</li>
+          <li>Inspect burner assembly</li>
+          <li>Check for nests, bugs &amp; debris</li>
+        </ul>
+      </div>
+
+      <!-- Furnace Service -->
+      <div class="svc-card">
+        <div class="svc-card-icon" aria-hidden="true">🔥</div>
+        <h3>Furnace Service</h3>
+        <p>Keep your RV's heating system running safely and efficiently. Our furnace service includes:</p>
+        <ul class="svc-sub-list">
+          <li>Clean burner orifice</li>
+          <li>Clean blower wheel</li>
+          <li>Inspect control board</li>
+          <li>Clean &amp; inspect combustion chamber</li>
+          <li>Inspect fan motor</li>
+          <li>Inspect duct work</li>
+        </ul>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="svc-card" style="background: var(--green); border-top-color: #ffd166; display: flex; flex-direction: column; justify-content: center;">
+        <div class="svc-card-icon" style="background: rgba(255,209,102,0.2);" aria-hidden="true">❓</div>
+        <h3 style="color: var(--white);">Don't See Your Issue?</h3>
+        <p style="color: rgba(255,255,255,0.78);">
+          If it's on your RV, chances are we can fix it. Give us a call and describe what's going on —
+          we'll let you know if we can help and get you scheduled fast.
+        </p>
+        <a href="tel:8452399746" class="photo-strip-cta" style="margin-top: 0.5rem;">📞 Call Us Now</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PHOTO STRIP ── -->
+  <div class="photo-strip">
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/67e9b6278ad1d04967a0234f/1c0666eb-b48e-41d6-acd4-1a58be965090/image3.jpeg"
+      alt="White truck towing a large RV trailer"
+      loading="lazy"
+    />
+    <div class="photo-strip-text">
+      <h2>We Come <span>To You</span></h2>
+      <p>
+        No towing. No shop wait times. We bring our fully equipped service truck to your campsite,
+        driveway, or storage facility throughout Sullivan, Orange &amp; Ulster Counties, NY.
+      </p>
+      <a href="#contact" class="photo-strip-cta">Request a Visit →</a>
+    </div>
+  </div>
+
+  <!-- ── HOURS ── -->
+  <div class="hours-strip">
+    <div class="hours-item">
+      <div class="hours-icon" aria-hidden="true">🕘</div>
+      <div class="hours-text">
+        <h4>Business Hours</h4>
+        <p>Monday – Friday &nbsp;|&nbsp; 9:00 AM – 5:00 PM</p>
+        <p>Closed Weekends</p>
+      </div>
+    </div>
+    <div class="hours-item">
+      <div class="hours-icon" aria-hidden="true">📍</div>
+      <div class="hours-text">
+        <h4>Service Area</h4>
+        <p>Sullivan, Orange &amp; Ulster Counties, NY</p>
+        <p>Travel outside area available for added fee</p>
+      </div>
+    </div>
+    <div class="hours-item">
+      <div class="hours-icon" aria-hidden="true">💰</div>
+      <div class="hours-text">
+        <h4>Pricing</h4>
+        <p>$125 service fee + $125/hr labor</p>
+        <p>Parts billed separately</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div class="section-label">Let's Talk</div>
+        <h2 class="section-title">Contact Us</h2>
+        <p>
+          Fill out some info including make of RV and the problem and we will be in touch shortly.
+          We can't wait to hear from you!
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">📞</div>
+            <div class="contact-item-text">
+              <h4>Phone</h4>
+              <p><a href="tel:8452399746">(845) 239-9746</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">✉️</div>
+            <div class="contact-item-text">
+              <h4>Email</h4>
+              <p><a href="mailto:RVTYMobile@outlook.com">RVTYMobile@outlook.com</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">🗺️</div>
+            <div class="contact-item-text">
+              <h4>Service Area</h4>
+              <p>Sullivan, Orange &amp; Ulster Counties, NY</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <h3>Send Us a Message</h3>
+        <p class="form-hint">Tell us your RV make and the issue — we'll get back to you shortly.</p>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="rvMake">RV Make &amp; Type</label>
+            <input type="text" id="rvMake" name="rvMake" placeholder="e.g. Forest River 2019 Travel Trailer" />
+          </div>
+          <div class="form-group">
+            <label for="message">Describe Your Issue *</label>
+            <textarea id="message" name="message" required placeholder="Tell us what's going on with your RV..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Send Message →</button>
+        </form>
+        <div id="formSuccess" style="display:none; margin-top:1.2rem; padding:1rem 1.2rem; background:#e8f5e9; border-radius:8px; color:#2e7d32; font-weight:600;">
+          ✅ Thank you! We'll be in touch soon.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>RV <span>There Yet</span> Mobile Camper Repair</h3>
+        <p>
+          Bringing professional RV and camper repair directly to you throughout Sullivan,
+          Orange, and Ulster Counties, New York.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Location</h4>
+        <p>Greater Sullivan County, NY</p>
+        <p>Orange County, NY</p>
+        <p>Ulster County, NY</p>
+        <p style="margin-top:0.5rem; font-size:0.82rem;">Extended travel available for additional fee.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:8452399746">(845) 239-9746</a>
+        <a href="mailto:RVTYMobile@outlook.com">RVTYMobile@outlook.com</a>
+        <p style="margin-top:0.8rem;">Mon – Fri: 9 AM – 5 PM</p>
+        <p>Closed Weekends</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 RV There Yet Mobile Camper Repair. All rights reserved.</span>
+      <span>Sullivan County, NY</span>
+    </div>
+    <div class="footer-astryx">
+      <span>Made by</span>
+      <img src="astryx-logo.jpg" alt="Astryx" />
+      <span>Astryx</span>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fields = this.querySelectorAll('[required]');
+      let valid = true;
+      fields.forEach(function(f) {
+        if (!f.value.trim()) {
+          valid = false;
+          f.style.borderColor = '#e53e3e';
+        } else {
+          f.style.borderColor = '';
+        }
+      });
+      if (valid) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+</html>
