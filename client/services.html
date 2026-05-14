@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -255,7 +255,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      color: var(--white);
       margin-bottom: 1.2rem;
       flex-shrink: 0;
     }
@@ -398,7 +398,12 @@
       gap: 1rem;
     }
 
-    .hours-icon { font-size: 2rem; }
+    .hours-icon {
+      color: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .hours-text h4 {
       color: var(--white);
@@ -449,9 +454,12 @@
     }
 
     .contact-item-icon {
-      font-size: 1.4rem;
       flex-shrink: 0;
       margin-top: 0.1rem;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .contact-item-text h4 {
@@ -679,7 +687,7 @@
       <li><a href="services.html" class="active">Services</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="tel:8452399746" class="nav-cta">📞 (845) 239-9746</a></li>
+      <li><a href="tel:8452399746" class="nav-cta">(845) 239-9746</a></li>
     </ul>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Open navigation menu">
       <span></span><span></span><span></span>
@@ -691,7 +699,7 @@
     <a href="services.html" class="active" onclick="closeMenu()">Services</a>
     <a href="about.html" onclick="closeMenu()">About</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="tel:8452399746">📞 (845) 239-9746</a>
+    <a href="tel:8452399746">(845) 239-9746</a>
   </div>
 
   <!-- ── PAGE HEADER ── -->
@@ -717,10 +725,9 @@
 
       <!-- RV Repair -->
       <div class="svc-card">
-        <div class="svc-card-icon" aria-hidden="true">🔧</div>
         <h3>RV Repair</h3>
         <p>We can diagnose and fix any issue you may have with your RV. Common areas we service:</p>
-        <ul class="svc-list">
+        <ul class="svc-sub-list">
           <li>Appliances</li>
           <li>Leveling Jacks</li>
           <li>Awnings</li>
@@ -733,7 +740,6 @@
 
       <!-- Roof Maintenance -->
       <div class="svc-card">
-        <div class="svc-card-icon" aria-hidden="true">🏠</div>
         <h3>Roof Maintenance</h3>
         <p>Protect your investment from the top down. Our roof maintenance service keeps leaks away before they start.</p>
         <ul class="svc-sub-list">
@@ -745,7 +751,6 @@
 
       <!-- RV Orientation -->
       <div class="svc-card">
-        <div class="svc-card-icon" aria-hidden="true">🗺️</div>
         <h3>RV Orientation</h3>
         <p>
           Many people buy an RV and don't fully understand how to use all its systems or what maintenance
@@ -756,7 +761,6 @@
 
       <!-- Water Heater Service -->
       <div class="svc-card">
-        <div class="svc-card-icon" aria-hidden="true">💧</div>
         <h3>Water Heater Service</h3>
         <p>Recommended annually for safe, reliable operation. Our thorough inspection covers:</p>
         <ul class="svc-sub-list">
@@ -771,7 +775,6 @@
 
       <!-- Furnace Service -->
       <div class="svc-card">
-        <div class="svc-card-icon" aria-hidden="true">🔥</div>
         <h3>Furnace Service</h3>
         <p>Keep your RV's heating system running safely and efficiently. Our furnace service includes:</p>
         <ul class="svc-sub-list">
@@ -786,13 +789,12 @@
 
       <!-- CTA Card -->
       <div class="svc-card" style="background: var(--green); border-top-color: #ffd166; display: flex; flex-direction: column; justify-content: center;">
-        <div class="svc-card-icon" style="background: rgba(255,209,102,0.2);" aria-hidden="true">❓</div>
         <h3 style="color: var(--white);">Don't See Your Issue?</h3>
         <p style="color: rgba(255,255,255,0.78);">
           If it's on your RV, chances are we can fix it. Give us a call and describe what's going on —
           we'll let you know if we can help and get you scheduled fast.
         </p>
-        <a href="tel:8452399746" class="photo-strip-cta" style="margin-top: 0.5rem;">📞 Call Us Now</a>
+        <a href="tel:8452399746" class="photo-strip-cta" style="margin-top: 0.5rem;">Call Us Now</a>
       </div>
 
     </div>
@@ -818,7 +820,7 @@
   <!-- ── HOURS ── -->
   <div class="hours-strip">
     <div class="hours-item">
-      <div class="hours-icon" aria-hidden="true">🕘</div>
+      <div class="hours-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="hours-text">
         <h4>Business Hours</h4>
         <p>Monday – Friday &nbsp;|&nbsp; 9:00 AM – 5:00 PM</p>
@@ -826,7 +828,7 @@
       </div>
     </div>
     <div class="hours-item">
-      <div class="hours-icon" aria-hidden="true">📍</div>
+      <div class="hours-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
       <div class="hours-text">
         <h4>Service Area</h4>
         <p>Sullivan, Orange &amp; Ulster Counties, NY</p>
@@ -834,7 +836,7 @@
       </div>
     </div>
     <div class="hours-item">
-      <div class="hours-icon" aria-hidden="true">💰</div>
+      <div class="hours-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
       <div class="hours-text">
         <h4>Pricing</h4>
         <p>$125 service fee + $125/hr labor</p>
@@ -856,21 +858,21 @@
 
         <div class="contact-details">
           <div class="contact-item">
-            <div class="contact-item-icon" aria-hidden="true">📞</div>
+            <div class="contact-item-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
             <div class="contact-item-text">
               <h4>Phone</h4>
               <p><a href="tel:8452399746">(845) 239-9746</a></p>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon" aria-hidden="true">✉️</div>
+            <div class="contact-item-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div class="contact-item-text">
               <h4>Email</h4>
               <p><a href="mailto:RVTYMobile@outlook.com">RVTYMobile@outlook.com</a></p>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon" aria-hidden="true">🗺️</div>
+            <div class="contact-item-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
             <div class="contact-item-text">
               <h4>Service Area</h4>
               <p>Sullivan, Orange &amp; Ulster Counties, NY</p>
@@ -908,7 +910,7 @@
           <button type="submit" class="btn-primary form-submit">Send Message →</button>
         </form>
         <div id="formSuccess" style="display:none; margin-top:1.2rem; padding:1rem 1.2rem; background:#e8f5e9; border-radius:8px; color:#2e7d32; font-weight:600;">
-          ✅ Thank you! We'll be in touch soon.
+          Thank you! We'll be in touch soon.
         </div>
       </div>
     </div>

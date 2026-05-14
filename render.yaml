@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: rv-there-yet
+    env: static
+    staticPublishPath: ./client
+    buildCommand: ""
+    routes:
+      - type: redirect
+        source: /
+        destination: /home.html
