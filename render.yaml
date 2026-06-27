@@ -5,5 +5,23 @@ services:
     staticPublishPath: ./client
     routes:
       - type: redirect
+        source: /services.html
+        destination: /services
+      - type: redirect
+        source: /about.html
+        destination: /about
+      - type: redirect
+        source: /contact.html
+        destination: /contact
+      - type: redirect
         source: /home.html
         destination: /
+      - type: rewrite
+        source: /services
+        destination: /services.html
+      - type: rewrite
+        source: /about
+        destination: /about.html
+      - type: rewrite
+        source: /contact
+        destination: /contact.html
