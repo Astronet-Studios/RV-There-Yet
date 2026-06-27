@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: rv-there-yet
+    name: rvthereyetmobilecamperrepair
     env: static
     staticPublishPath: ./client
     routes:
