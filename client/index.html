@@ -299,6 +299,17 @@
       margin-top: 0.2rem;
     }
 
+    .stat-plus {
+      display: flex;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1;
+      margin-top: -0.1rem;
+    }
+
     /* -- SECTION WRAPPER ------------------------------- */
     section { padding: 6rem 5vw; }
 
@@ -780,7 +791,7 @@
     <div class="hero-bg-img" role="img" aria-label="Camper with string lights at dusk"></div>
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <h1>Mobile <em>RV &amp; Camper</em> Repair — We Come to You</h1>
+      <h1>Mobile <em>RV &amp; Camper</em> Repair ï¿½ We Come to You</h1>
       <p class="hero-sub">
         Professional, reliable RV repair at your location. From AC tune-ups to full winterization,
         we keep your adventures on track across the Hudson Valley.
@@ -792,9 +803,10 @@
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-number">3</div>
-        <div class="stat-label">Counties<br>Served</div>
+        <div class="stat-number">$250</div>
+        <div class="stat-label">Initial<br>Fee</div>
       </div>
+      <div class="stat-plus" aria-hidden="true">+</div>
       <div class="stat">
         <div class="stat-number">$125</div>
         <div class="stat-label">Per Hour<br>Rate</div>
@@ -853,7 +865,7 @@
           <h3>Winterization</h3>
           <p>
             We drain all tanks and add antifreeze throughout your plumbing system so your RV is ready
-            for winter's worst. Don't risk burst pipes — let us protect your investment.
+            for winter's worst. Don't risk burst pipes ï¿½ let us protect your investment.
           </p>
         </div>
       </div>
@@ -886,7 +898,7 @@
       <div class="price-card price-card-featured">
         <div class="price-amount">$250</div>
         <div class="price-label">First Visit Total</div>
-        <p class="price-desc">Service fee + first hour of labor — we charge $250 to respond to your location.</p>
+        <p class="price-desc">Service fee + first hour of labor ï¿½ we charge $250 to respond to your location.</p>
       </div>
       <div class="price-card">
         <div class="price-amount">$125</div>
@@ -907,7 +919,7 @@
       <div class="hours-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="hours-text">
         <h4>Business Hours</h4>
-        <p>Monday – Friday &nbsp;|&nbsp; 9:00 AM – 5:00 PM</p>
+        <p>Monday ï¿½ Friday &nbsp;|&nbsp; 9:00 AM ï¿½ 5:00 PM</p>
         <p>Closed Weekends</p>
       </div>
     </div>
@@ -928,7 +940,7 @@
         <div class="section-label">Let's Talk</div>
         <h2 class="section-title">Contact Us</h2>
         <p>
-          Tell us about your RV and the issue you're experiencing — we'll get back to you quickly
+          Tell us about your RV and the issue you're experiencing ï¿½ we'll get back to you quickly
           and get you back on the road.
         </p>
 
@@ -1021,7 +1033,7 @@
         <h4>Contact</h4>
         <a href="tel:8452399746">(845) 239-9746</a>
         <a href="mailto:RVTYMobile@outlook.com">RVTYMobile@outlook.com</a>
-        <p style="margin-top:0.8rem;">Mon – Fri: 9 AM – 5 PM</p>
+        <p style="margin-top:0.8rem;">Mon ï¿½ Fri: 9 AM ï¿½ 5 PM</p>
         <p>Closed Weekends</p>
       </div>
     </div>
@@ -1044,7 +1056,7 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
 
-    // Minimal form handling — shows success message
+    // Minimal form handling ï¿½ shows success message
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const form = this;
