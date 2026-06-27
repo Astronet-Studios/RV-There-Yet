@@ -5,5 +5,5 @@ services:
     staticPublishPath: ./client
     routes:
       - type: redirect
-        source: /
-        destination: /home.html
+        source: /home.html
+        destination: /
