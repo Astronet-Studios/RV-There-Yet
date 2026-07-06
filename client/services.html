@@ -900,8 +900,12 @@
             <input type="email" id="email" name="email" required placeholder="you@example.com" />
           </div>
           <div class="form-group">
-            <label for="rvType">RV / Camper Type</label>
-            <select id="rvType" name="rvType">
+            <label for="phone">Phone # *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="(845) 555-1234" />
+          </div>
+          <div class="form-group">
+            <label for="rvType">RV / Camper Type *</label>
+            <select id="rvType" name="rvType" required>
               <option value="">Select type...</option>
               <option>Class A Motorhome</option>
               <option>Class B / Van Conversion</option>
@@ -1035,8 +1039,15 @@
           status.style.display = 'block';
         }
 
-        const formData = new FormData(form);
-        formData.append('_subject', 'New RV There Yet contact form submission');
+        const formData = new FormData();
+        formData.append('_subject', 'New Customer Inquiry');
+        formData.append('First Name', form.firstName.value.trim());
+        formData.append('Last Name', form.lastName.value.trim());
+        formData.append('Phone #', form.phone.value.trim());
+        formData.append('Email', form.email.value.trim());
+        formData.append('RV Type', form.rvType.value);
+        formData.append('Description', form.message.value.trim());
+        formData.append('_replyto', form.email.value.trim());
         fetch('https://formspree.io/f/mkolebvv', {
           method: 'POST',
           body: formData,
