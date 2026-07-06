@@ -1109,13 +1109,21 @@
       const fields = form.querySelectorAll('[required]');
       let valid = true;
       fields.forEach(function(f) {
-        if (!f.value.trim()) {
+        if (!f.value.trim() || !f.checkValidity()) {
           valid = false;
           f.style.borderColor = '#e53e3e';
         } else {
           f.style.borderColor = '';
         }
       });
+      if (!valid) {
+        if (status) {
+          status.textContent = 'Please check that all fields are filled out properly before submitting';
+          status.style.color = '#b91c1c';
+          status.style.display = 'block';
+        }
+        return;
+      }
       if (valid) {
         if (submitButton) submitButton.disabled = true;
         if (status) {
