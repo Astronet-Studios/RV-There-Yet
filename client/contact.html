@@ -806,7 +806,7 @@
       if (valid) {
         if (submitButton) submitButton.disabled = true;
         if (status) {
-          status.textContent = 'sending....';
+          status.textContent = 'Sending....';
           status.style.color = '#374151';
           status.style.display = 'block';
         }
@@ -827,7 +827,7 @@
         .then(data => {
           if (data.success) {
             if (status) {
-              status.textContent = 'sent!';
+              status.textContent = 'Sent!';
               status.style.color = '#2e7d32';
               status.style.display = 'block';
               form._statusTimer = setTimeout(() => {

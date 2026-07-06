@@ -10,16 +10,34 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const smtpPort = Number(process.env.SMTP_PORT || 587);
+const smtpHost = (process.env.SMTP_HOST || '').trim();
+const smtpUser = (process.env.SMTP_USER || '').trim();
+const smtpPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
+const smtpFrom = (process.env.SMTP_FROM_EMAIL || '').trim();
 const smtpSecure =
   typeof process.env.SMTP_SECURE === 'string'
     ? process.env.SMTP_SECURE.toLowerCase() === 'true'
     : smtpPort === 465;
 
+function extractEmailAddress(value) {
+  const match = value.match(/<([^>]+)>/);
+  return (match ? match[1] : value).trim().toLowerCase();
+}
+
+const smtpUserAddress = extractEmailAddress(smtpUser);
+const smtpFromAddress = extractEmailAddress(smtpFrom);
+const isGmailHost = /gmail\.com$/i.test(smtpHost);
+const useSmtpUserAsFrom =
+  isGmailHost &&
+  smtpFromAddress &&
+  smtpUserAddress &&
+  smtpFromAddress !== smtpUserAddress;
+const effectiveFrom = useSmtpUserAsFrom ? smtpUser : smtpFrom || smtpUser;
+
 const requiredSmtpEnvVars = [
   'SMTP_HOST',
   'SMTP_USER',
   'SMTP_PASS',
-  'SMTP_FROM_EMAIL',
 ];
 const missingSmtpVars = requiredSmtpEnvVars.filter((key) => !process.env[key]);
 
@@ -36,14 +54,20 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
+  host: smtpHost,
   port: smtpPort,
   secure: smtpSecure,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: smtpUser,
+    pass: smtpPass,
   },
 });
+
+if (useSmtpUserAsFrom) {
+  console.warn(
+    'SMTP_FROM_EMAIL does not match SMTP_USER for Gmail; using SMTP_USER as From sender.'
+  );
+}
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
@@ -57,7 +81,7 @@ app.post('/api/contact', async (req, res) => {
   try {
     // Send email to business
     await transporter.sendMail({
-      from: process.env.SMTP_FROM_EMAIL,
+      from: effectiveFrom,
       to: 'jkadet@hotmail.com',
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
@@ -73,7 +97,7 @@ app.post('/api/contact', async (req, res) => {
 
     // Send confirmation email to user
     await transporter.sendMail({
-      from: process.env.SMTP_FROM_EMAIL,
+      from: effectiveFrom,
       to: email,
       subject: 'We received your message - RV There Yet',
       html: `
