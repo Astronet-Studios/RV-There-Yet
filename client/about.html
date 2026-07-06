@@ -234,8 +234,6 @@
       align-items: center;
     }
 
-    .about-content {}
-
     .about-content p {
       font-size: 1.05rem;
       color: var(--gray);
@@ -539,6 +537,7 @@
       background: var(--cream);
       transition: border-color var(--transition), box-shadow var(--transition);
       outline: none;
+      width: 100%;
       -webkit-appearance: none;
       appearance: none;
     }
@@ -551,7 +550,10 @@
       background: var(--white);
     }
 
-    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
 
     .btn-primary {
       display: inline-flex;
