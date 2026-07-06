@@ -7,10 +7,3 @@ services:
     build:
       command: npm install
     start: npm start
-    envVars:
-      - key: RESEND_API_KEY
-        scope: build,runtime
-      - key: RESEND_FROM_EMAIL
-        scope: build,runtime
-      - key: CONTACT_TO_EMAIL
-        scope: build,runtime

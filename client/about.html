@@ -897,7 +897,7 @@
       <div class="contact-form-wrapper">
         <h3>Send Us a Message</h3>
         <p class="form-hint">Include your RV make/model and a description of the issue, and we&rsquo;ll get back to you shortly.</p>
-        <form id="contactForm" novalidate>
+        <form id="contactForm" action="https://formspree.io/f/mkolebvv" method="POST" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="firstName">First Name *</label>
@@ -1048,19 +1048,24 @@
           status.style.display = 'block';
         }
 
-        const formData = {
-          firstName: form.firstName.value,
-          lastName: form.lastName.value,
-          email: form.email.value,
-          rvType: form.rvType.value,
-          message: form.message.value
-        };
-        fetch('/api/contact', {
+        const formData = new FormData(form);
+        formData.append('_subject', 'New RV There Yet contact form submission');
+        fetch('https://formspree.io/f/mkolebvv', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
+          body: formData,
+          headers: { Accept: 'application/json' }
         })
-        .then(res => res.json())
+        .then(async res => {
+          if (res.ok) return { success: true };
+          const data = await res.json().catch(() => ({}));
+          const formspreeErrors = Array.isArray(data.errors)
+            ? data.errors.map(item => item.message).join(', ')
+            : '';
+          return {
+            success: false,
+            error: data.error || formspreeErrors || 'failed to send'
+          };
+        })
         .then(data => {
           if (data.success) {
             if (status) {
