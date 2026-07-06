@@ -969,15 +969,41 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
 
+    function ensureFormStatus(form) {
+      if (!form) return null;
+      let status = document.getElementById('formStatus');
+      if (!status) {
+        const submitButton = form.querySelector('.form-submit');
+        if (!submitButton) return null;
+        status = document.createElement('div');
+        status.id = 'formStatus';
+        status.style.marginTop = '0.65rem';
+        status.style.fontWeight = '600';
+        status.style.fontSize = '0.95rem';
+        status.style.display = 'none';
+        submitButton.insertAdjacentElement('afterend', status);
+      }
+      return status;
+    }
+
     // Reset form state on page load
     function resetContactForm() {
       const form = document.getElementById('contactForm');
       const success = document.getElementById('formSuccess');
+      const status = ensureFormStatus(form);
+      if (form && form._statusTimer) {
+        clearTimeout(form._statusTimer);
+        form._statusTimer = null;
+      }
       if (form) {
         form.style.display = 'block';
         form.reset();
       }
       if (success) success.style.display = 'none';
+      if (status) {
+        status.style.display = 'none';
+        status.textContent = '';
+      }
     }
     resetContactForm();
 
@@ -985,6 +1011,12 @@
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const form = this;
+      const submitButton = form.querySelector('.form-submit');
+      const status = ensureFormStatus(form);
+      if (form._statusTimer) {
+        clearTimeout(form._statusTimer);
+        form._statusTimer = null;
+      }
       const fields = form.querySelectorAll('[required]');
       let valid = true;
       fields.forEach(function(f) {
@@ -996,6 +1028,13 @@
         }
       });
       if (valid) {
+        if (submitButton) submitButton.disabled = true;
+        if (status) {
+          status.textContent = 'sending....';
+          status.style.color = '#374151';
+          status.style.display = 'block';
+        }
+
         const formData = {
           firstName: form.firstName.value,
           lastName: form.lastName.value,
@@ -1011,16 +1050,35 @@
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            form.style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
+            if (status) {
+              status.textContent = 'sent!';
+              status.style.color = '#2e7d32';
+              status.style.display = 'block';
+              form._statusTimer = setTimeout(() => {
+                status.style.display = 'none';
+                status.textContent = '';
+                form._statusTimer = null;
+              }, 2500);
+            }
             form.reset();
           } else {
-            alert('Error: ' + (data.error || 'Failed to send message'));
+            if (status) {
+              status.textContent = data.error || 'failed to send';
+              status.style.color = '#b91c1c';
+              status.style.display = 'block';
+            }
           }
         })
         .catch(err => {
           console.error('Error:', err);
-          alert('Error sending message. Please try again.');
+          if (status) {
+            status.textContent = 'failed to send';
+            status.style.color = '#b91c1c';
+            status.style.display = 'block';
+          }
+        })
+        .finally(() => {
+          if (submitButton) submitButton.disabled = false;
         });
       }
     });
