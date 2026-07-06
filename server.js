@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
-dotenv.config();
+dotenv.config({ override: true });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -116,6 +116,18 @@ app.post('/api/contact', async (req, res) => {
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Email error:', error);
+
+    if (
+      error &&
+      error.responseCode === 535 &&
+      /5\.7\.139/.test(error.message || '')
+    ) {
+      return res.status(500).json({
+        error:
+          'Outlook SMTP login blocked. Enable SMTP AUTH for this mailbox or use OAuth2.',
+      });
+    }
+
     res.status(500).json({ error: 'Failed to send email' });
   }
 });
@@ -136,7 +148,16 @@ app.listen(PORT, () => {
   if (missingSmtpVars.length === 0) {
     transporter.verify((error) => {
       if (error) {
-        console.error('SMTP verification failed:', error.message);
+        if (
+          error.responseCode === 535 &&
+          /5\.7\.139/.test(error.message || '')
+        ) {
+          console.error(
+            'SMTP verification failed: Outlook SMTP AUTH is disabled for this mailbox/account.'
+          );
+        } else {
+          console.error('SMTP verification failed:', error.message);
+        }
       } else {
         console.log('SMTP server is ready to send emails');
       }
