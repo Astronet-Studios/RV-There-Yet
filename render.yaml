@@ -3,6 +3,7 @@ services:
     name: RV There Yet
     runtime: node
     plan: free
+    root: .
     build:
       command: npm install
     start: npm start
