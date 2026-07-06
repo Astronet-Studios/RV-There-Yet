@@ -302,6 +302,8 @@
 
     .about-photo-col {
       position: relative;
+      overflow: visible;
+      padding-bottom: 0;
     }
 
     .about-photo-main {
@@ -313,33 +315,44 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.18);
     }
 
-    .about-photo-badge {
+    .about-certification-box {
       position: absolute;
-      bottom: -1.5rem;
-      left: -1.5rem;
-      background: var(--green);
-      color: var(--white);
+      left: 0;
+      top: 100%;
+      bottom: auto;
+      width: 100%;
+      max-width: 340px;
+      background: var(--white);
+      border: 1px solid rgba(27, 77, 53, 0.2);
       border-radius: 12px;
-      padding: 1.2rem 1.6rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+      padding: 0.65rem 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 3;
+      min-height: 0;
     }
 
-    .about-photo-badge-num {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 2.2rem;
-      line-height: 1;
-      color: #ffd166;
+    .about-certification-box img {
+      width: 145px;
+      height: 145px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #fff;
+      padding: 0.15rem;
+      flex-shrink: 0;
     }
 
-    .about-photo-badge-text {
+    .about-certification-text {
+      margin: 0;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      margin-top: 0.25rem;
+      color: var(--green);
+      line-height: 1.35;
     }
 
     /* -- PHOTO GALLERY --------------------------------- */
@@ -677,14 +690,21 @@
     /* -- RESPONSIVE ------------------------------------ */
     @media (max-width: 1024px) {
       .about-layout { gap: 3rem; }
-      .about-photo-badge { bottom: -1rem; left: -0.5rem; }
+      .about-photo-col { padding-bottom: 0; }
     }
 
     @media (max-width: 900px) {
       .about-layout { grid-template-columns: 1fr; }
-      .about-photo-col { order: -1; }
+      .about-photo-col { order: -1; padding-bottom: 0; }
       .about-photo-main { height: 380px; }
-      .about-photo-badge { bottom: 1rem; left: 1rem; }
+      .about-certification-box {
+        left: 0;
+        top: 100%;
+        bottom: auto;
+        max-width: 100%;
+        min-height: 0;
+      }
+      .about-certification-box img { width: 86px; height: 86px; }
       .credentials-grid { grid-template-columns: 1fr 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item img { height: 260px; }
@@ -792,9 +812,9 @@
           alt="RV technician on a ladder working on a camper in a garage"
           loading="lazy"
         />
-        <div class="about-photo-badge">
-          <div class="about-photo-badge-num">20+</div>
-          <div class="about-photo-badge-text">Years of Experience</div>
+        <div class="about-certification-box">
+          <img src="/NRVTA-Logo.jpg" alt="NRVTA certification logo" loading="lazy" />
+          <p class="about-certification-text">Nationally Certified RV Technician</p>
         </div>
       </div>
 
