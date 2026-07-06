@@ -1060,7 +1060,6 @@
         formData.append('Email', form.email.value.trim());
         formData.append('RV Type', form.rvType.value);
         formData.append('Description', form.message.value.trim());
-        formData.append('_replyto', form.email.value.trim());
         fetch('https://formspree.io/f/mkolebvv', {
           method: 'POST',
           body: formData,
