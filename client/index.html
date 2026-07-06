@@ -767,8 +767,9 @@
 
   <!-- -- NAV -- -->
   <nav>
-    <div class="nav-logo">RV <span>There Yet</span></div>
+    <a href="index.html" class="nav-logo">RV <span>There Yet</span></a>
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -780,6 +781,7 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="services.html" onclick="closeMenu()">Services</a>
     <a href="about.html" onclick="closeMenu()">About</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
@@ -890,14 +892,9 @@
     <p class="section-sub">No hidden fees. We tell you exactly what to expect before we start.</p>
 
     <div class="pricing-grid">
-      <div class="price-card">
-        <div class="price-amount">$125</div>
-        <div class="price-label">Service Fee</div>
-        <p class="price-desc">One-time call-out fee to get us to your door and begin diagnosing your RV.</p>
-      </div>
       <div class="price-card price-card-featured">
         <div class="price-amount">$250</div>
-        <div class="price-label">First Visit Total</div>
+        <div class="price-label">Initial Visit Total</div>
         <p class="price-desc">Service fee + first hour of labor - we charge $250 to respond to your location.</p>
       </div>
       <div class="price-card">
@@ -971,6 +968,7 @@
 
       <div class="contact-form-wrapper">
         <h3>Send Us a Message</h3>
+        <p class="form-hint">Include your RV make/model and a description of the issue, and we&rsquo;ll get back to you shortly.</p>
         <form id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
@@ -1056,7 +1054,19 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
 
-    // Minimal form handling - shows success message
+    // Reset form state on page load
+    function resetContactForm() {
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      if (form) {
+        form.style.display = 'block';
+        form.reset();
+      }
+      if (success) success.style.display = 'none';
+    }
+    resetContactForm();
+
+    // Form submission handler
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const form = this;
@@ -1071,8 +1081,32 @@
         }
       });
       if (valid) {
-        form.style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
+        const formData = {
+          firstName: form.firstName.value,
+          lastName: form.lastName.value,
+          email: form.email.value,
+          rvType: form.rvType.value,
+          message: form.message.value
+        };
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            form.style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+            form.reset();
+          } else {
+            alert('Error: ' + (data.error || 'Failed to send message'));
+          }
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          alert('Error sending message. Please try again.');
+        });
       }
     });
 

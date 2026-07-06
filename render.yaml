@@ -1,27 +1,21 @@
 services:
   - type: web
     name: RV There Yet
-    env: static
-    staticPublishPath: ./client
-    routes:
-      - type: redirect
-        source: /services.html
-        destination: /services
-      - type: redirect
-        source: /about.html
-        destination: /about
-      - type: redirect
-        source: /contact.html
-        destination: /contact
-      - type: redirect
-        source: /home.html
-        destination: /
-      - type: rewrite
-        source: /services
-        destination: /services.html
-      - type: rewrite
-        source: /about
-        destination: /about.html
-      - type: rewrite
-        source: /contact
-        destination: /contact.html
+    runtime: node
+    plan: free
+    build:
+      command: npm install
+    start: npm start
+    envVars:
+      - key: SMTP_HOST
+        scope: build,runtime
+      - key: SMTP_PORT
+        scope: build,runtime
+      - key: SMTP_SECURE
+        scope: build,runtime
+      - key: SMTP_USER
+        scope: build,runtime
+      - key: SMTP_PASS
+        scope: build,runtime
+      - key: SMTP_FROM_EMAIL
+        scope: build,runtime

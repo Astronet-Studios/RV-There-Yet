@@ -528,7 +528,8 @@
     }
 
     .form-group input,
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select {
       border: 1.5px solid var(--border);
       border-radius: 8px;
       padding: 0.75rem 1rem;
@@ -543,7 +544,8 @@
     }
 
     .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group textarea:focus,
+    .form-group select:focus {
       border-color: var(--orange);
       box-shadow: 0 0 0 3px rgba(232,98,42,0.12);
       background: var(--white);
@@ -695,9 +697,9 @@
 
   <!-- -- NAV -- -->
   <nav>
-    <a href="/" class="nav-logo">RV <span>There Yet</span></a>
+    <a href="index.html" class="nav-logo">RV <span>There Yet</span></a>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -709,7 +711,7 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/" onclick="closeMenu()">Home</a>
+    <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="services.html" onclick="closeMenu()">Services</a>
     <a href="about.html" class="active" onclick="closeMenu()">About</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
@@ -720,11 +722,11 @@
   <div class="page-header">
     <div class="page-header-bg" role="img" aria-label="White truck towing an RV at sunset"></div>
     <div class="page-header-inner">
-      <div class="page-header-badge">Advanced Certified RV Technician � NRVTA 2025</div>
+      <div class="page-header-badge">Advanced Certified RV Technician - NRVTA 2025</div>
       <h1>Who <em>We Are</em></h1>
       <p class="page-header-sub">
         A family-driven RV repair business built on 20+ years of camping experience and a commitment
-        to getting you back on the road � or back to enjoying your campsite.
+        to getting you back on the road or back to enjoying your campsite.
       </p>
     </div>
   </div>
@@ -744,7 +746,7 @@
         </p>
 
         <p>
-          My goal � and my family&rsquo;s goal � is to help you enjoy the camping experience as much as
+          My goal, and my family&rsquo;s goal, is to help you enjoy the camping experience as much as
           you can, and to deal with the breakdowns and problems we all face in our RVs. I have not met
           a person yet who hasn&rsquo;t had an issue with their camper or motorhome. Unfortunately, none
           of our RVs are perfect, and we all need help now and then.
@@ -757,7 +759,7 @@
           </div>
           <div class="credential-card">
             <div class="credential-card-label">Training</div>
-            <h4>NRVTA � Texas, 2025</h4>
+            <h4>NRVTA - Texas, 2025</h4>
           </div>
           <div class="credential-card">
             <div class="credential-card-label">Experience</div>
@@ -769,7 +771,7 @@
           </div>
         </div>
 
-        <a href="#contact" class="about-cta">Get in Touch ?</a>
+        <a href="#contact" class="about-cta">Get in Touch?</a>
       </div>
 
       <div class="about-photo-col">
@@ -826,7 +828,7 @@
           alt="RV technician on a ladder working on a camper in a garage"
           loading="lazy"
         />
-        <div class="gallery-item-caption">Mobile Repairs � We Come to You</div>
+        <div class="gallery-item-caption">Mobile Repairs &amp; We Come to You</div>
       </div>
       <div class="gallery-item">
         <img
@@ -877,7 +879,7 @@
             <div class="contact-item-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div class="contact-item-text">
               <h4>Hours</h4>
-              <p>Mon � Fri &nbsp;|&nbsp; 9:00 AM � 5:00 PM</p>
+              <p>Mon - Fri &nbsp;|&nbsp; 9:00 AM - 5:00 PM</p>
             </div>
           </div>
           <div class="contact-item">
@@ -892,7 +894,7 @@
 
       <div class="contact-form-wrapper">
         <h3>Send Us a Message</h3>
-        <p class="form-hint">Include your RV make/model and a description of the issue � we&rsquo;ll get back to you shortly.</p>
+        <p class="form-hint">Include your RV make/model and a description of the issue, and we&rsquo;ll get back to you shortly.</p>
         <form id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
@@ -909,13 +911,26 @@
             <input type="email" id="email" name="email" required placeholder="you@example.com" />
           </div>
           <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" required placeholder="Your RV model, issue, and location..."></textarea>
+            <label for="rvType">RV / Camper Type</label>
+            <select id="rvType" name="rvType">
+              <option value="">Select type...</option>
+              <option>Class A Motorhome</option>
+              <option>Class B / Van Conversion</option>
+              <option>Class C Motorhome</option>
+              <option>Fifth Wheel</option>
+              <option>Travel Trailer</option>
+              <option>Pop-up / Tent Trailer</option>
+              <option>Other</option>
+            </select>
           </div>
-          <button type="submit" class="btn-primary form-submit">Send Message ?</button>
+          <div class="form-group">
+            <label for="message">Describe Your Issue *</label>
+            <textarea id="message" name="message" required placeholder="Tell us what's going on with your RV..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Send Message</button>
         </form>
         <div id="formSuccess" style="display:none; margin-top:1.2rem; padding:1rem 1.2rem; background:#e8f5e9; border-radius:8px; color:#2e7d32; font-weight:600;">
-          Thank you! We&rsquo;ll be in touch soon.
+          Thank you! We'll be in touch soon.
         </div>
       </div>
     </div>
@@ -965,9 +980,23 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
 
+    // Reset form state on page load
+    function resetContactForm() {
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      if (form) {
+        form.style.display = 'block';
+        form.reset();
+      }
+      if (success) success.style.display = 'none';
+    }
+    resetContactForm();
+
+    // Form submission handler
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const fields = this.querySelectorAll('[required]');
+      const form = this;
+      const fields = form.querySelectorAll('[required]');
       let valid = true;
       fields.forEach(function(f) {
         if (!f.value.trim()) {
@@ -978,8 +1007,42 @@
         }
       });
       if (valid) {
-        this.style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
+        const formData = {
+          firstName: form.firstName.value,
+          lastName: form.lastName.value,
+          email: form.email.value,
+          rvType: form.rvType.value,
+          message: form.message.value
+        };
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            form.style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+            form.reset();
+          } else {
+            alert('Error: ' + (data.error || 'Failed to send message'));
+          }
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          alert('Error sending message. Please try again.');
+        });
+      }
+    });
+
+    // Scroll-activated nav background
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(17, 24, 32, 0.98)';
+      } else {
+        nav.style.background = 'rgba(17, 24, 32, 0.97)';
       }
     });
   </script>
