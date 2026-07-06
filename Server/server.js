@@ -8,6 +8,26 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+const smtpSecure =
+  typeof process.env.SMTP_SECURE === 'string'
+    ? process.env.SMTP_SECURE.toLowerCase() === 'true'
+    : smtpPort === 465;
+
+const requiredSmtpEnvVars = [
+  'SMTP_HOST',
+  'SMTP_USER',
+  'SMTP_PASS',
+  'SMTP_FROM_EMAIL',
+];
+const missingSmtpVars = requiredSmtpEnvVars.filter((key) => !process.env[key]);
+
+if (missingSmtpVars.length > 0) {
+  console.warn(
+    `Missing SMTP environment variables: ${missingSmtpVars.join(', ')}`
+  );
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -16,8 +36,8 @@ app.use(express.static('client'));
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+  port: smtpPort,
+  secure: smtpSecure,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -82,4 +102,14 @@ app.get('/api/health', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
+  if (missingSmtpVars.length === 0) {
+    transporter.verify((error) => {
+      if (error) {
+        console.error('SMTP verification failed:', error.message);
+      } else {
+        console.log('SMTP server is ready to send emails');
+      }
+    });
+  }
 });
