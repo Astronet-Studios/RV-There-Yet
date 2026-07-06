@@ -1,5 +1,5 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -9,64 +9,32 @@ dotenv.config({ override: true });
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const smtpPort = Number(process.env.SMTP_PORT || 587);
-const smtpHost = (process.env.SMTP_HOST || '').trim();
-const smtpUser = (process.env.SMTP_USER || '').trim();
-const smtpPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
-const smtpFrom = (process.env.SMTP_FROM_EMAIL || '').trim();
-const smtpSecure =
-  typeof process.env.SMTP_SECURE === 'string'
-    ? process.env.SMTP_SECURE.toLowerCase() === 'true'
-    : smtpPort === 465;
+const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+const resendFromEmail =
+  (process.env.RESEND_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || '').trim();
+const contactToEmail = 'RVTYmobile@outlook.com';
 
-function extractEmailAddress(value) {
-  const match = value.match(/<([^>]+)>/);
-  return (match ? match[1] : value).trim().toLowerCase();
-}
+const requiredEmailEnvVars = ['RESEND_API_KEY', 'RESEND_FROM_EMAIL'];
+const missingEmailVars = requiredEmailEnvVars.filter((key) => !process.env[key]);
 
-const smtpUserAddress = extractEmailAddress(smtpUser);
-const smtpFromAddress = extractEmailAddress(smtpFrom);
-const isGmailHost = /gmail\.com$/i.test(smtpHost);
-const useSmtpUserAsFrom =
-  isGmailHost &&
-  smtpFromAddress &&
-  smtpUserAddress &&
-  smtpFromAddress !== smtpUserAddress;
-const effectiveFrom = useSmtpUserAsFrom ? smtpUser : smtpFrom || smtpUser;
-
-const requiredSmtpEnvVars = [
-  'SMTP_HOST',
-  'SMTP_USER',
-  'SMTP_PASS',
-];
-const missingSmtpVars = requiredSmtpEnvVars.filter((key) => !process.env[key]);
-
-if (missingSmtpVars.length > 0) {
+if (missingEmailVars.length > 0) {
   console.warn(
-    `Missing SMTP environment variables: ${missingSmtpVars.join(', ')}`
+    `Missing email environment variables: ${missingEmailVars.join(', ')}`
   );
 }
+
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client')));
 
-// Email transporter configuration
-const transporter = nodemailer.createTransport({
-  host: smtpHost,
-  port: smtpPort,
-  secure: smtpSecure,
-  auth: {
-    user: smtpUser,
-    pass: smtpPass,
-  },
-});
-
-if (useSmtpUserAsFrom) {
-  console.warn(
-    'SMTP_FROM_EMAIL does not match SMTP_USER for Gmail; using SMTP_USER as From sender.'
-  );
+function parseResendError(resultError) {
+  if (!resultError) return 'Unknown email provider error';
+  if (typeof resultError === 'string') return resultError;
+  if (resultError.message) return resultError.message;
+  return JSON.stringify(resultError);
 }
 
 // Contact form endpoint
@@ -78,11 +46,18 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
+  if (!resend || !resendFromEmail) {
+    return res.status(500).json({
+      error:
+        'Email provider is not configured. Set RESEND_API_KEY and RESEND_FROM_EMAIL.',
+    });
+  }
+
   try {
     // Send email to business
-    await transporter.sendMail({
-      from: effectiveFrom,
-      to: 'jkadet@hotmail.com',
+    const businessSendResult = await resend.emails.send({
+      from: resendFromEmail,
+      to: [contactToEmail],
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -95,10 +70,14 @@ app.post('/api/contact', async (req, res) => {
       replyTo: email,
     });
 
+    if (businessSendResult.error) {
+      throw new Error(parseResendError(businessSendResult.error));
+    }
+
     // Send confirmation email to user
-    await transporter.sendMail({
-      from: effectiveFrom,
-      to: email,
+    const confirmationSendResult = await resend.emails.send({
+      from: resendFromEmail,
+      to: [email],
       subject: 'We received your message - RV There Yet',
       html: `
         <h2>Thank you for contacting RV There Yet!</h2>
@@ -113,22 +92,22 @@ app.post('/api/contact', async (req, res) => {
       `,
     });
 
+    if (confirmationSendResult.error) {
+      throw new Error(parseResendError(confirmationSendResult.error));
+    }
+
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Email error:', error);
 
-    if (
-      error &&
-      error.responseCode === 535 &&
-      /5\.7\.139/.test(error.message || '')
-    ) {
+    if (/domain is not verified|verify a domain/i.test(error.message || '')) {
       return res.status(500).json({
         error:
-          'Outlook SMTP login blocked. Enable SMTP AUTH for this mailbox or use OAuth2.',
+          'Resend sender domain is not verified yet. Verify your domain in Resend and try again.',
       });
     }
 
-    res.status(500).json({ error: 'Failed to send email' });
+    res.status(500).json({ error: 'Failed to send email via Resend' });
   }
 });
 
@@ -145,22 +124,11 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 
-  if (missingSmtpVars.length === 0) {
-    transporter.verify((error) => {
-      if (error) {
-        if (
-          error.responseCode === 535 &&
-          /5\.7\.139/.test(error.message || '')
-        ) {
-          console.error(
-            'SMTP verification failed: Outlook SMTP AUTH is disabled for this mailbox/account.'
-          );
-        } else {
-          console.error('SMTP verification failed:', error.message);
-        }
-      } else {
-        console.log('SMTP server is ready to send emails');
-      }
-    });
+  if (!resendApiKey || !resendFromEmail) {
+    console.warn(
+      'Email sending disabled until RESEND_API_KEY and RESEND_FROM_EMAIL are configured.'
+    );
+  } else {
+    console.log('Resend email provider configured');
   }
 });

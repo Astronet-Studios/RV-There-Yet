@@ -8,15 +8,9 @@ services:
       command: npm install
     start: npm start
     envVars:
-      - key: SMTP_HOST
+      - key: RESEND_API_KEY
         scope: build,runtime
-      - key: SMTP_PORT
+      - key: RESEND_FROM_EMAIL
         scope: build,runtime
-      - key: SMTP_SECURE
-        scope: build,runtime
-      - key: SMTP_USER
-        scope: build,runtime
-      - key: SMTP_PASS
-        scope: build,runtime
-      - key: SMTP_FROM_EMAIL
+      - key: CONTACT_TO_EMAIL
         scope: build,runtime
